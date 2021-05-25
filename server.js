@@ -41,7 +41,7 @@ db.mongoose
 
 // definir ruta simple get
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to kris application." });
+  res.json({ message: "Welcome to CryptoManager backend application." });
 });
 
 // routes
