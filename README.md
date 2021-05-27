@@ -3,7 +3,7 @@
 Hecho con Node.js, para probar su funcionamiento hay que asegurarse que hay una base de datos MongoDB escuchando en el puerto 12707
 
 
-## Funcionamiento 
+## Funcionamiento
 
 Una vez en el directorio del repositorio, ejecuta el comando:
 `node server.js`
@@ -56,4 +56,3 @@ Despues de inicializar mongoose, no es necesario crear funciones CRUD (Create, D
 * Encontrar user por email: `User.findOne({ email: … })`
 * Encontrar user por username: `User.findOne({ username: … })`
 * Encontrar todos los roles cuyo nombre esta en el array de roles:` Role.find({ name: { $in: roles } })`
-
