@@ -8,8 +8,10 @@ const User = mongoose.model(
     password: String,
     firstName: String,
     lastName: String,
+    binancePublic: String,
     binanceSecret: String,
-    krakenSecret:String,
+    krakenPublic: String,
+    krakenSecret: String,
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,

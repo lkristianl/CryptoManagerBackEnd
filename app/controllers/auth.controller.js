@@ -12,20 +12,25 @@ const User = db.user;
 const Role = db.role;
 
 var jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
+const bcryptjs = require("bcryptjs");
 
 exports.signup = (req, res) => {
   const user = new User({
     username: req.body.username,
     email: req.body.email,
-    name: req.body.name,
+    firstName: req.body.firstName,
     lastName: req.body.lastName,
-    password: bcrypt.hashSync(req.body.password, 8)
+    binancePublic: req.body.binancePublic,
+    binanceSecret: req.body.binanceSecret,
+    krakenPublic: req.body.krakenPublic,
+    krakenSecret: req.body.krakenSecret,
+    password: bcryptjs.hashSync(req.body.password, 8)
   });
 
   user.save((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
+      console.log('db');
       return;
     }
 
@@ -87,7 +92,7 @@ exports.signin = (req, res) => {
         return res.status(404).send({ message: "User Not found." });
       }
 
-      var passwordIsValid = bcrypt.compareSync(
+      var passwordIsValid = bcryptjs.compareSync(
         req.body.password,
         user.password
       );
@@ -108,13 +113,18 @@ exports.signin = (req, res) => {
       for (let i = 0; i < user.roles.length; i++) {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
       }
+
       res.status(200).send({
         id: user._id,
         username: user.username,
         email: user.email,
-        name: user.name,
+        firstName: user.firstName,
         lastName: user.lastName,
         roles: authorities,
+        binancePublic: user.binancePublic,
+        binanceSecret: user.binanceSecret,
+        krakenPublic: user.krakenPublic,
+        krakenSecret: user.krakenSecret,
         accessToken: token
       });
     });
